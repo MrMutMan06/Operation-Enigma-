@@ -1,0 +1,12 @@
+# Python 
+__pycache__/
+*.pyc
+.venv/
+venv/
+test.py 
+
+# Environment/secrets
+.env
+
+# OS/editor clutter
+.vscode/
