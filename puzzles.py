@@ -15,8 +15,6 @@ def to_subscript(string):
 def format_with_base(number, base):
     return f"{number}{to_subscript(str(base))}"
 
-print(format_with_base(67, 8))
-
 ## The number generators:
 
 ### The interger number generators 
@@ -33,28 +31,43 @@ def p_float_number_generator(): # positive float number generator
 def n_float_number_generator(): # negative float number generator
     return round(random.uniform(-256, -1), 3) # includes -256 and -1
 
-# Positive conversion algorithms:
+# Question functions:
 
-## The denary to binary conversion algorithm (positive numbers)
-def den_to_bin():
+## The denary to binary conversion questions 
+def den_to_bin_question():
+    # Back end calculations
+    denary = p_integer_number_generator()
+    binary = bin(denary)[2:] 
+    answer = format_with_base(binary, 2)
+
+    # Front end (formatting the question and response)
+    question = f"Convert {format_with_base(denary, 10)} to binary."
+    response = f"The answer is {answer}"
+    return question, response
+
+print(den_to_bin_question())
+
+## The binary to denary conversion questions
+def bin_to_den_question():
+    # Back end calculations
     denary = p_integer_number_generator() # generate a random positive integer
     binary = bin(denary)[2:] # convert to binary (python has a built in function) and remove the '0b' prefix
-    return denary, binary
+    answer = format_with_base(denary, 10)
 
-print(den_to_bin()) # testing the function
+    # Front end (formatting the question and response)
+    question = f"Convert {format_with_base(binary, 2)} to denary."
+    response = f"The answer is {answer}"
+    return question, response
 
-## The binary to denary conversion algorithm (positive numbers)
-def bin_to_den():
-    denary = p_integer_number_generator() # generate a random positive integer
-    binary = bin(denary)[2:] # convert to binary (python has a built in function) and remove the '0b' prefix
-    return binary, denary
+print(bin_to_den_question())
 
-print(bin_to_den()) # testing the function
-
-## The denary to octal conversion algorithm (positive numbers)
-def den_to_oct():
+## The denary to octal conversion questions
+def den_to_oct_question():
     denary = p_integer_number_generator() # generate a random positive integer
     octal = oct(denary)[2:] # convert to octal (python has a built in function) and remove the '0o' prefix
-    return denary, octal
+    answer = format_with_base(octal, 8)
+    question = f"Convert {format_with_base(denary, 10)} to octal."
+    response = f"The answer is {answer}"
+    return question, response
 
-print(den_to_oct()) # testing the function
+print(den_to_oct_question())
