@@ -7,17 +7,18 @@ import random
 
 ### The interger number generators 
 def p_integer_number_generator(): # positive integer number generator
-    return random.randint(0, 256) # includes 0 and 256
+    return random.randint(0, 255) # includes 0 and 255 (the range of an 8-bit unsigned integer)
 
-def n_integer_number_generator(): # negative integer number generator
-    return random.randint(-256, -1) # includes -256 and -1
+def twoscomp_integer_number_generator(): # Positive and negative integer number generator
+    return random.randint(-128, 127) # includes -128 and 127 (the range of an 8-bit signed integer)
 
-### The floating point number generators
-def p_float_number_generator(): # positive float number generator
-    return round(random.uniform(0, 256), 3) # includes 0 and 256
-
-def n_float_number_generator(): # negative float number generator
-    return round(random.uniform(-256, -1), 3) # includes -256 and -1
+### The sign bit, exponent and mantissa generators
+def sign_bit_generator(): # sign bit generator
+    return random.randint(0, 1) # includes 0 and 1 (the range of a sign bit)
+def exponent_generator(): # exponent generator
+    return random.randint(1, 6) # includes 1 and 6 (the range of a 3-bit exponent)
+def mantissa_generator(): # mantissa generator
+    return random.randint(0, 15) # includes 0 and 15 (the range of a 4-bit mantissa)
 
 ## Adding the base (formatting)
 SUBSCRIPTS = {
@@ -308,5 +309,68 @@ def hex_to_oct():
 
 # print(hex_to_oct())
 
-# Two's complement questions
+# Two's complement questions (8 bit signed integers)
+def den_to_twoscomp():
+    # Back end calculations
+    denary = twoscomp_integer_number_generator() # generate a random positive or negative integer
+    if denary >= 0:
+        twoscomp = format(denary, '08b') # convert to binary (python has a built in function) and format to 8 bits
+    else:
+        twoscomp = format((1 << 8) + denary, '08b') # convert to two's complement binary (python has a built in function) and format to 8 bits
+
+    # Front end (formatting the question and response)
+    ## Question
+    def den_to_twoscomp_question():
+        question = f"Convert {format_with_base(denary, 10)} to two's complement."
+        return question
+    
+    ## Response
+    def den_to_twoscomp_response():
+        answer = format_with_base(twoscomp, 2)
+        response = f"The answer is {answer}"
+        return response
+    
+    return den_to_twoscomp_question(), den_to_twoscomp_response()
+
+# print(den_to_twoscomp())
+
+# Two's complement to denary questions (8 bit signed integers)
+def twoscomp_to_den():
+    # Back end calculations
+    denary = twoscomp_integer_number_generator() # generate a random positive or negative integer
+    if denary >= 0:
+        twoscomp = format(denary, '08b') # convert to binary (python has a built in function) and format to 8 bits
+    else:
+        twoscomp = format((1 << 8) + denary, '08b') # convert to two's complement binary (python has a built in function) and format to 8 bits
+
+    # Front end (formatting the question and response)
+    ## Question
+    def twoscomp_to_den_question():
+        question = f"Convert {format_with_base(twoscomp, 2)} to denary."
+        return question
+    
+    ## Response
+    def twoscomp_to_den_response():
+        answer = format_with_base(denary, 10)
+        response = f"The answer is {answer}"
+        return response
+    
+    return twoscomp_to_den_question(), twoscomp_to_den_response()
+
+# print(twoscomp_to_den())
+
+# Floating point number questions (Mantissa and exponent representation)
+
+## Simple floating point representation (8 bits total)
+
+### The structure is: [sign bit] [Exponent] [Mantissa] 
+### 1 sign bit, 3 bits for the exponent, 4 bits for the mantissa (8 bits total)
+### The response should be in the form [sign bit] [Exponent] [Mantissa] (e.g. 0 011 1010, where [sign bit] is the first bit, [Exponent] is the next 3 bits, and [Mantissa] is the last 4 bits)
+
+### Add the floating point representation question functions here: float to binary, binary to float
+
+#####################################################################################################################
+
+# Answer checker
+
 
