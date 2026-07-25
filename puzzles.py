@@ -12,14 +12,6 @@ def p_integer_number_generator(): # positive integer number generator
 def twoscomp_integer_number_generator(): # Positive and negative integer number generator
     return random.randint(-128, 127) # includes -128 and 127 (the range of an 8-bit signed integer)
 
-### The sign bit, exponent and mantissa generators
-def sign_bit_generator(): # sign bit generator
-    return random.randint(0, 1) # includes 0 and 1 (the range of a sign bit)
-def exponent_generator(): # exponent generator
-    return random.randint(1, 6) # includes 1 and 6 (the range of a 3-bit exponent)
-def mantissa_generator(): # mantissa generator
-    return random.randint(0, 15) # includes 0 and 15 (the range of a 4-bit mantissa)
-
 ## Adding the base (formatting)
 SUBSCRIPTS = {
     "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄",
@@ -358,18 +350,6 @@ def twoscomp_to_den():
     return twoscomp_to_den_question(), twoscomp_to_den_response()
 
 # print(twoscomp_to_den())
-
-# Floating point number questions (Mantissa and exponent representation)
-
-## Simple floating point representation (8 bits total)
-
-### The structure is: [sign bit] [Exponent] [Mantissa] 
-### 1 sign bit, 3 bits for the exponent, 4 bits for the mantissa (8 bits total)
-### The response should be in the form [sign bit] [Exponent] [Mantissa] (e.g. 0 011 1010, where [sign bit] is the first bit, [Exponent] is the next 3 bits, and [Mantissa] is the last 4 bits)
-
-### Add the floating point representation question functions here: float to binary, binary to float
-
-#####################################################################################################################
 
 
 
